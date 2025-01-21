@@ -508,6 +508,23 @@ return [
                 ],
             ],
         ],
+
+        'jQueryLightBox' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => get_public_path().'/vendor/lightbox/css/lightbox.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => get_public_path().'/vendor/lightbox/js/lightbox.js',
+                ],
+            ],
+        ],
+
     ],
 
     /*

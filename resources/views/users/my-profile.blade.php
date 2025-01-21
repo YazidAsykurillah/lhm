@@ -66,7 +66,9 @@
                         <input type="file" class="form-control" name="photo_file">
                     </div>
                     <div class="col-sm-5">
-                        <img class="profile-user-img img-fluid" src="{{asset(get_public_path().'/photo-files/'.$profile->photo_file)}}" alt="Pas Photo">
+                        <a href="{{asset(get_public_path().'/photo-files/'.$profile->photo_file)}}" data-lightbox="{{$profile->photo_file}}" data-title="Pas foto">
+                            <img class="profile-user-img img-fluid" src="{{asset(get_public_path().'/photo-files/'.$profile->photo_file)}}" alt="Pas Photo">
+                        </a>
                         <input type="hidden" name="old_photo_file" value="{{$profile->photo_file}}">
                     </div>
                 </div>
@@ -82,7 +84,9 @@
                         <input type="file" class="form-control" name="ktp_file">
                     </div>
                     <div class="col-sm-5">
-                        <img class="profile-user-img img-fluid" src="{{asset(get_public_path().'/ktp-files/'.$profile->ktp_file)}}" alt="Foto KTP">
+                        <a href="{{asset(get_public_path().'/ktp-files/'.$profile->ktp_file)}}" data-lightbox="{{$profile->ktp_file}}" data-title="File KTP">
+                            <img class="profile-user-img img-fluid" src="{{asset(get_public_path().'/ktp-files/'.$profile->ktp_file)}}" alt="Foto KTP">
+                        </a>
                         <input type="hidden" name="old_ktp_file" value="{{$profile->ktp_file}}">
                     </div>
                 </div>
@@ -98,7 +102,9 @@
                         <input type="file" class="form-control" name="passport_file">
                     </div>
                     <div class="col-sm-5">
-                        <img class="profile-user-img img-fluid" src="{{asset(get_public_path().'/passport-files/'.$profile->passport_file)}}" alt="Photo Passport">
+                        <a href="{{asset(get_public_path().'/passport-files/'.$profile->passport_file)}}" data-lightbox="{{$profile->passport_file}}" data-title="File KTP">
+                            <img class="profile-user-img img-fluid" src="{{asset(get_public_path().'/passport-files/'.$profile->passport_file)}}" alt="Photo Passport">
+                        </a>
                         <input type="hidden" name="old_passport_file" value="{{$profile->passport_file}}">
                     </div>
                 </div>

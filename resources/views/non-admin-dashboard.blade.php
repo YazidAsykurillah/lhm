@@ -12,6 +12,19 @@
     </div>
     <!-- /.info-box -->
   </div>
+  <div class="col-md-3 col-sm-6 col-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-info"><i class="fas fa-fw fa-file-upload"></i></span>
+
+      <div class="info-box-content">
+        <button type="button" id="btn-create-saving-transaction" class="btn btn-sm btn-default" title="Upload Bukti Transfer Tabungan">
+            Upload Bukti Transfer
+        </button>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+  </div>
 </div>
 <!-- /.row -->
 
@@ -21,9 +34,7 @@
       <div class="card-header">
           <h3 class="card-title">Daftar Riwayat Tabungan Umrah Anda</h3>
           <div class="card-tools">
-              <button type="button" id="btn-create-saving-transaction" class="btn btn-xs btn-primary" title="Upload Bukti Transfer Tabungan">
-                <i class="fas fa-upload"></i>&nbsp;&nbsp;Upload Bukti Transfer
-              </button>
+              
           </div>
       </div>
       <div class="card-body">
@@ -159,6 +170,16 @@
                     name: 'umrah_manifest.umrah_batch.code_batch',
                     orderable:false,
                     searchable:false,
+                    render:function(data, type, row, meta){
+                        let umrah_batch='';
+                            umrah_batch+=data;
+                            umrah_batch+='<p>';
+                            umrah_batch+=   '<span class="">';
+                            umrah_batch+=       '';
+                            umrah_batch+=   '</span>';
+                            umrah_batch+='</p>';
+                        return umrah_batch;
+                    }
                 },
                 {
                     data: 'transaction_source',
@@ -195,7 +216,10 @@
                     render:function(data, type, row, meta){
                       let img_source = "{{ asset(get_public_path().'/transaction-receipt') }}/"+data;
                       let transaction_receipt='';
-                          transaction_receipt+='<img class="profile-user-img img-fluid" src="'+img_source+'">';
+                          //transaction_receipt+='<img class="profile-user-img img-fluid" src="'+img_source+'">';
+                            transaction_receipt+='<a href="'+img_source+'" data-lightbox="'+data+'" data-title="Bukti Transaksi">';
+                            transaction_receipt+= '<img class="profile-user-img img-fluid" src="'+img_source+'">';
+                            transaction_receipt+='</a>';
                       return transaction_receipt;
                     }
                 },
@@ -205,9 +229,9 @@
                     render:function(data, type, row, meta){
                         let is_confirmed='';
                         if(data == true){
-                            is_confirmed = '<i class="fas fa-checked" title="Sudah Diverifikasi"></i>';
+                            is_confirmed = '<span class="badge bg-success">Sudah Diverifikasi</span>';
                         }else{
-                            is_confirmed='<i class="fas fa-exclamation-circle" title="Proses Verifikasi"></i>';
+                            is_confirmed='<span class="badge bg-warning">Proses Verifikasi</span>';
                         }
                         return is_confirmed;
                     }

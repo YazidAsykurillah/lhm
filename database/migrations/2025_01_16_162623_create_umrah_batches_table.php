@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('umrah_batches', function (Blueprint $table) {
             $table->id();
             $table->string('code_batch')->unique();
+            $table->string('name');
             $table->date('departure_schedule')->comments('Tanggal keberangkatan');
             $table->text('description');
             $table->enum('availability',['available', 'unavailable']);
