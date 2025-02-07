@@ -63,8 +63,7 @@ return [
     |
     */
 
-    'logo' => 'Mastour Travel',
-    //'logo_img' => '/public/logo.jpeg',
+    'logo' => 'Live Host Management',
     'logo_img' => 'logo.jpeg',
     'logo_img_class' => 'brand-image  elevation-3',
     'logo_img_xl' => null,
@@ -402,17 +401,17 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/2.2.1/js/dataTables.min.js',
+                    'location' => '/vendor/datatables/dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/2.2.1/js/dataTables.bootstrap5.js',
+                    'location' => '/vendor/datatables/dataTables.bootstrap4.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/2.2.1/css/dataTables.bootstrap5.css',
+                    'location' => '/vendor/datatables/dataTables.bootstrap4.css',
                 ],
             ],
         ],
@@ -422,22 +421,22 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+                    'location' => '/vendor/select2/select2.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+                    'location' => '/vendor/select2/select2.css',
                 ],
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
+                    'location' => '/vendor/chartJS/Chart.bundle.min.js',
                 ],
             ],
         ],
@@ -447,7 +446,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '/vendor/sweet-alert/sweetalert2@8',
                 ],
             ],
         ],
@@ -457,12 +456,12 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
+                    'location' => '/vendor/pace/pace-theme-center-radar.min.css',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                    'location' => '/vendor/pace/pace.min.js',
                 ],
             ],
         ],
@@ -472,17 +471,17 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css',
+                    'location' => '/vendor/datetimepicker/bootstrap-datetimepicker.min.css',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'https://momentjs.com/downloads/moment.js',
+                    'location' => 'vendor/datetimepicker/moment.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js',
+                    'location' => '/vendor/datetimepicker/bootstrap-datetimepicker.min.js',
                 ],
             ],
         ],

@@ -19,15 +19,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'phone_number',
-        'address',
-        'username',
-        'gender',
-        'is_profile_updated'
+    protected $guarded = [
+        'id',
     ];
 
     /**
@@ -51,16 +44,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-
-    public function umrah_manifests(): HasMany
-    {
-        return $this->hasMany(UmrahManifest::class);
-    }
-
-    public function deposit(): HasOne
-    {
-        return $this->hasOne(Deposit::class);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Deposit;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,9 +50,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['max:255'],
+            'email' => ['required','email','max:255'],
             'phone_number' => ['required','string', 'min:8','max:255','unique:users,phone_number'],
-            //'address'=>['required'],
+            'address'=>['required','min:10'],
+            'username'=>['required','unique:users,username'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -70,14 +70,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone_number'=>trim(trim($data['phone_number'])),
-            //'address'=>$data['address'],
+            'address'=>$data['address'],
+            'username'=>$data['username'],
             'password' => Hash::make($data['password']),
-            'username'=>trim(trim($data['phone_number'])),
-        ]);
-        //create deposit
-        $deposit = Deposit::create([
-            'user_id'=>$user->id,
-            'amount'=>0
         ]);
         return $user;
     }

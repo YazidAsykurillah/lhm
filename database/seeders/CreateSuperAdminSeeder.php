@@ -1,14 +1,14 @@
 <?php
-  
+
 namespace Database\Seeders;
-  
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-  
-class CreateAdminUserSeeder extends Seeder
+
+class CreateSuperAdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,23 +17,18 @@ class CreateAdminUserSeeder extends Seeder
     {
         $user = User::updateOrcreate(
             [
-                'name' => 'Mang Admin', 
-                'email' => 'admin@email.com',
-                'username'=>'001',
+                'name' => 'Yazid Asykurillah', 
+                'email' => 'yazasykurillah@gmail.com',
+                'username'=>'000',
             ],
             [
-                'password' => bcrypt('lhm!admin#88'),
-                'phone_number'=>'081291513745'
+                'password' => bcrypt('lhm!superadmin#88'),
+                'phone_number'=>'08888'
             ],
         );
             
         $role = Role::updateOrCreate(
-            ['name'=>'Administrator']
-        );
-         
-       
-        $role->syncPermissions(
-            ['manage-role', 'manage-user', 'access-admin-dashboard']
+            ['name'=>'Super Admin']
         );
          
         $user->assignRole([$role->id]);

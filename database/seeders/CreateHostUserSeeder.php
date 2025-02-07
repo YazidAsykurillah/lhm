@@ -1,14 +1,14 @@
 <?php
-  
+
 namespace Database\Seeders;
-  
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-  
-class CreateJamaahUserSeeder extends Seeder
+
+class CreateHostUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,26 +17,23 @@ class CreateJamaahUserSeeder extends Seeder
     {
         $user = User::updateOrcreate(
             [
-                'name' => 'Ahmad Suparjo', 
-                'email' => 'ahmadsuparjo@email.com',
+                'name' => 'Nina Ninu', 
+                'email' => 'ninaninu@email.com',
                 'username'=>'002',
             ],
             [
-                'name' => 'Ahmad Suparjo', 
-                'email' => 'ahmadsuparjo@email.com',
-                'username'=>'002',
-                'password' => bcrypt('123456'),
-                'phone_number'=>'07878789'
+                'password' => bcrypt('lhm!host#88'),
+                'phone_number'=>'01111'
             ],
         );
             
         $role = Role::updateOrCreate(
-            ['name'=>'Member']
+            ['name'=>'Live Host']
         );
-         
-        $permissions = Permission::pluck('id','id')->all();
-       
-        $role->syncPermissions($permissions);
+
+        $role->syncPermissions(
+            ['access-my-profile']
+        );
          
         $user->assignRole([$role->id]);
     }
