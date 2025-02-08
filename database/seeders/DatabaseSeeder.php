@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateAdminUserSeeder::class);
         $this->call(CreateSuperAdminSeeder::class);
         $this->call(CreateHostUserSeeder::class);
+        $this->call(CreatePlatformSeeder::class);
+        $this->call(PlatformAccountSeeder::class);
         
     }
 }

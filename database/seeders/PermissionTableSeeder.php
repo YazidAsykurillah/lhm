@@ -16,6 +16,8 @@ class PermissionTableSeeder extends Seeder
         $permissions = [
            'manage-role',
            'manage-user',
+           'manage-platform',
+           'manage-platform-account',
            'access-admin-dashboard',
            'access-my-profile',
         ];

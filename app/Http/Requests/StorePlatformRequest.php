@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUmrahManifestRequest extends FormRequest
+class StorePlatformRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class StoreUmrahManifestRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'umrah_batch_id'=>'required',
-            'user_id'=>'required'
+            'name'=>'required|unique:platforms,name'
         ];
+
         return $rules;
     }
 }

@@ -2,19 +2,21 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-          <h3 class="card-title">History Live Host</h3>
+          <h3 class="card-title">Your Live Host History</h3>
           <div class="card-tools">
               
           </div>
       </div>
       <div class="card-body">
-          <table class="table table-bordered table-responsive" id="table-task-histories">
+          <table class="table table-bordered table-responsive" id="table-live-host-histories">
               <thead>
                   <tr>
                       <th style="width:5%;">No</th>
-                      <th>Tanggal</th>
-                      <th>Jam</th>
+                      <th>Date</th>
                       <th>Paltform</th>
+                      <th>Account</th>
+                      <th>Started Time</th>
+                      <th>Finished Time</th>
                       <th>Status</th>
                   </tr>
               </thead>

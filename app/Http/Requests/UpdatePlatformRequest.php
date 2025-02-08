@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreSavingTransactionRequest extends FormRequest
+class UpdatePlatformRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,16 +22,13 @@ class StoreSavingTransactionRequest extends FormRequest
      */
     public function rules(): array
     {
-        //return[];
         $rules = [
-            'transaction_source'=>'required',
-            'sender_name'=>'required',
-            'bank_account_id'=>'required|exists:bank_accounts,id',
-            'amount'=>'required',
-            'transaction_date'=>'required',
-            'transaction_receipt' => 'required|file|max:2000|mimes:jpg,png,jpeg',
-            'umrah_manifest_id'=>'required|integer|exists:umrah_manifests,id'
+            'name'=>[
+                'required',
+                Rule::unique('platforms')->ignore($this->segment(2))
+            ]
         ];
+
         return $rules;
     }
 }

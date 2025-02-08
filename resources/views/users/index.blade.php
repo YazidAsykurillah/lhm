@@ -16,7 +16,7 @@
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{url('/users')}}">
-                        Users
+                        User
                     </a>
                 </li>
                 <li class="breadcrumb-item active">Index</li>
@@ -30,26 +30,31 @@
     <div class="card-header">
         <h3 class="card-title">User List</h3>
         <div class="card-tools">
-            <a href="/users/create" class="btn btn-sm btn-default" title="Create new user">Create</a>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
         </div>
     </div>
     <div class="card-body">
-        <table class="table table-bordered" id="table-users">
-            <thead>
-                <tr>
-                    <th style="width:5%;">No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Roles</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="table-users">
+                <thead>
+                    <tr>
+                        <th style="width:5%;">No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Roles</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>    
+        </div>
+        
     </div>
-    <div class="card-footer">
-        <div id="data-table-button-tools" class=""></div>
+    <div class="card-footer clearfix" style="display: block;">
+        <a href="/users/create" class="btn btn-sm btn-info float-right" title="Create new user">Create User</a>
     </div>
 </div>
 
@@ -72,7 +77,7 @@
                     let roles_template = '';
                     if(row.roles.length >0){
                         $.each( row.roles, function( key, value ){
-                            roles_template+='<span class="badge bg-info">';
+                            roles_template+='<span class="badge">';
                             roles_template+=    value.name;
                             roles_template+='</span>&nbsp;';
                         });

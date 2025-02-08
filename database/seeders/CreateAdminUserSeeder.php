@@ -23,7 +23,7 @@ class CreateAdminUserSeeder extends Seeder
             ],
             [
                 'password' => bcrypt('lhm!admin#88'),
-                'phone_number'=>'081291513745'
+                'phone_number'=>'010101'
             ],
         );
             
@@ -33,7 +33,7 @@ class CreateAdminUserSeeder extends Seeder
          
        
         $role->syncPermissions(
-            ['manage-role', 'manage-user', 'access-admin-dashboard']
+            ['manage-role', 'manage-user', 'access-admin-dashboard', 'manage-platform', 'manage-platform-account']
         );
          
         $user->assignRole([$role->id]);

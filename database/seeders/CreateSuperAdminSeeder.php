@@ -17,8 +17,8 @@ class CreateSuperAdminSeeder extends Seeder
     {
         $user = User::updateOrcreate(
             [
-                'name' => 'Yazid Asykurillah', 
-                'email' => 'yazasykurillah@gmail.com',
+                'name' => 'THE ROOT', 
+                'email' => 'root@email.com',
                 'username'=>'000',
             ],
             [
@@ -30,7 +30,7 @@ class CreateSuperAdminSeeder extends Seeder
         $role = Role::updateOrCreate(
             ['name'=>'Super Admin']
         );
-         
+        
         $user->assignRole([$role->id]);
     }
 }

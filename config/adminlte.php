@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => 'Live Host Management',
+    'logo' => env('APP_NAME'),
     'logo_img' => 'logo.jpeg',
     'logo_img_class' => 'brand-image  elevation-3',
     'logo_img_xl' => null,
@@ -307,44 +307,33 @@ return [
         ],
 
         // Sidebar items:
-        
-        [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
         [
             'text' => 'User',
             'url' => 'users',
             'icon'=>'far fa-fw fa-user',
             'can'=>'manage-user'
         ],
-        [
-            'text' => 'Batch',
-            'url' => 'umrah-batch',
-            'icon'=>'far fa-fw fa-calendar',
-            'can'=>'manage-umrah-batch'
-        ],
 
-        [
-            'text' => 'Deposito',
-            'url' => 'deposit',
-            'icon'=>'fas fa-fw fa-money-check',
-            'can'=>'manage-deposits'
-        ],
-        [
-            'text' => 'Manifest Umrah',
-            'url' => 'umrah-manifest',
-            'icon'=>'far fa-fw fa-calendar',
-            'can'=>'manage-umrah-manifest'
-        ],
         
+        [
+            'text' => 'Platform',
+            'url' => 'platform',
+            'icon'=>'fas fa-fw fa-cogs',
+            'can'=>'manage-platform'
+        ],
 
         [
-            'text' => 'Roles',
+            'text' => 'Platform Account',
+            'url' => 'platform-account',
+            'icon'=>'fas fa-fw fa-cogs',
+            'can'=>'manage-platform-account'
+        ],
+
+        [
+            'text' => 'Role',
             'url' => 'roles',
             'icon'=>'fas fa-fw fa-cogs',
-            'can'=>'role-list'
+            'can'=>'manage-role'
         ],
         
         ['header' => 'account_settings'],
@@ -401,7 +390,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/datatables/dataTables.min.js',
+                    'location' => '/vendor/datatables/datatables.js',
                 ],
                 [
                     'type' => 'js',
@@ -409,9 +398,24 @@ return [
                     'location' => '/vendor/datatables/dataTables.bootstrap4.js',
                 ],
                 [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '/vendor/datatables/dataTables.responsive.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '/vendor/datatables/responsive.bootstrap4.js',
+                ],
+                [
                     'type' => 'css',
                     'asset' => false,
                     'location' => '/vendor/datatables/dataTables.bootstrap4.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '/vendor/datatables/responsive.bootstrap4.css',
                 ],
             ],
         ],
@@ -476,7 +480,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'vendor/datetimepicker/moment.js',
+                    'location' => '/vendor/datetimepicker/moment.js',
                 ],
                 [
                     'type' => 'js',
