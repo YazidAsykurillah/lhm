@@ -41,11 +41,12 @@
                 <thead>
                     <tr>
                         <th style="width:5%;">No</th>
-                        <th>Name</th>
+                        <th style="width:20%;">Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
-                        <th>Roles</th>
-                        <th>Action</th>
+                        <th style="width:10%;">Roles</th>
+                        <th>Rate Per Hour</th>
+                        <th style="width:10%;">Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -84,6 +85,17 @@
                     }
                     return roles_template;
                 }},
+                {
+                    data: 'rate_per_hour',
+                    name: 'rate_per_hour',
+                    render:function(data, type, row, meta){
+                        return accounting.formatNumber(data,{
+                            precision: 2,
+                            thousand: ".",
+                            decimal : ","
+                        });
+                    }
+                },
                 {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center', render:function(data, type, row, meta){
                     let action ='';
                         action+='<a class="btn btn-default btn-xs btn-edit" title="Edit" href="/users/'+row.id+'/edit">';

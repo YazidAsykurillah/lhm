@@ -25,7 +25,7 @@ class UpdatePlatformAccountRequest extends FormRequest
         $rules = [
             'name'=>[
                 'required',
-                Rule::unique('platform_accounts')->ignore($this->segment(2))
+                Rule::unique('platform_accounts','name')->where('platform_id', $this->input('platform_id'))->ignore($this->segment(2))
             ]
         ];
 

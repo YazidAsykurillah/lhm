@@ -149,6 +149,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
+                    <input type="hidden" name="platform_id" value="{{ $platform->id}}">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-save"></i> Save

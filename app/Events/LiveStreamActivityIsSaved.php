@@ -10,16 +10,21 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UmrahManifestHasBeenSaved
+use App\Models\LiveStreamActivity;
+
+class LiveStreamActivityIsSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct()
+
+    public $live_stream_activity;
+    
+    public function __construct(LiveStreamActivity $live_stream_activity)
     {
-        //
+        $this->live_stream_activity = $live_stream_activity;
     }
 
     /**

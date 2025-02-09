@@ -8,7 +8,8 @@ use App\Models\User;
 
 class UserSelect2Controller extends Controller
 {
-    public function selectUserForUmrahManifest(Request $request)
+
+    public function index(Request $request)
     {
         $data = [];
         if($request->has('q')){
@@ -23,4 +24,28 @@ class UserSelect2Controller extends Controller
         }
         return response()->json($data);
     }
+
+    public function selectStreamer(Request $request)
+    {
+        $data = [];
+        if($request->has('q')){
+            $search = $request->q;
+            $data = User::query()
+                ->whereHas('roles', function($q) {
+                    $q->where('roles.name','=', 'Live Host');
+                })
+                ->where('name','LIKE',"%$search%")
+                ->paginate(10);
+        }
+        else{
+            $data = User::query()
+                ->whereHas('roles', function($q) {
+                    $q->where('roles.name','=', 'Live Host');
+                })
+                ->paginate(10); 
+        }
+        return response()->json($data);
+    }
+
+
 }

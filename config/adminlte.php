@@ -314,20 +314,31 @@ return [
             'can'=>'manage-user'
         ],
 
-        
         [
-            'text' => 'Platform',
-            'url' => 'platform',
-            'icon'=>'fas fa-fw fa-cogs',
-            'can'=>'manage-platform'
+            'text' => 'Live Stream Activity',
+            'url' => 'live-stream-activity',
+            'icon'=>'fas fa-fw fa-book',
         ],
 
         [
-            'text' => 'Platform Account',
-            'url' => 'platform-account',
-            'icon'=>'fas fa-fw fa-cogs',
-            'can'=>'manage-platform-account'
+            'text'    => 'Master Data',
+            'icon'    => 'fas fa-fw fa-database',
+            'submenu' => [
+                [
+                    'text' => 'Platform',
+                    'url' => 'platform',
+                    'can'=>'manage-platform'
+                ],
+                /*[
+                    'text' => 'Platform Account',
+                    'url' => 'platform-account',
+                    'can'=>'manage-platform-account'
+                ],*/
+            ],
         ],
+        
+
+        
 
         [
             'text' => 'Role',
@@ -478,6 +489,11 @@ return [
                     'location' => '/vendor/datetimepicker/bootstrap-datetimepicker.min.css',
                 ],
                 [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '/vendor/datetimepicker/tempusdominus-bootstrap-4.min.css',
+                ],
+                [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '/vendor/datetimepicker/moment.js',
@@ -486,6 +502,11 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '/vendor/datetimepicker/bootstrap-datetimepicker.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '/vendor/datetimepicker/tempusdominus-bootstrap-4.min.js',
                 ],
             ],
         ],

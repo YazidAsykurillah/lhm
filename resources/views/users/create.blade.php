@@ -42,6 +42,12 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Rate Per Hour:</strong>
+                <input type="text" name="rate_per_hour" placeholder="Rate Per Hour" class="form-control autonumeric" value="">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Password:</strong>
                 <input type="password" name="password" placeholder="Password" class="form-control">
             </div>
@@ -71,4 +77,22 @@
 </form>
 
 
+@endsection
+
+@section('js')
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        //Autonumeric amount
+        new AutoNumeric('.autonumeric',{
+            digitGroupSeparator:'.',
+            decimalCharacter:',',
+            decimalPlaces:'0',
+            minimumValue:0,
+            modifyValueOnWheel:false,
+            watchExternalChanges:true,
+        });
+
+    });
+</script>
 @endsection

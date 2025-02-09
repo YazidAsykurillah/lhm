@@ -53,6 +53,7 @@ class UserController extends Controller
         ]);
     
         $input = $request->all();
+        $input['rate_per_hour'] = extract_to_decimal($request->rate_per_hour);
         $input['password'] = Hash::make($input['password']);
         $input['username'] = $request->email;
     
@@ -108,6 +109,7 @@ class UserController extends Controller
         ]);
     
         $input = $request->all();
+        $input['rate_per_hour'] = extract_to_decimal($request->rate_per_hour);
         if(!empty($input['password'])){ 
             $input['password'] = Hash::make($input['password']);
         }else{
