@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Datatables;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DataTables;
+use Carbon\Carbon;
 use App\Models\LiveStreamActivity;
 
 class LiveStreamActivityDatatablesController extends Controller
@@ -59,6 +60,10 @@ class LiveStreamActivityDatatablesController extends Controller
             ])
             ->select('live_stream_activities.*');
 
+        if(\Auth::user()->canNot('view-all-live-stream-activity')){
+            $data->where('user_id','=', \Auth::user()->id);
+        }
+
         return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -68,4 +73,54 @@ class LiveStreamActivityDatatablesController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
     }
+
+
+    //Ongoing live stream activity
+    public function getOngoing(Request $request)
+    {
+        $data = LiveStreamActivity::query()
+            ->with([
+                'streamer'=>function($query){
+                    return $query->select('users.id', 'users.name');
+                }
+            ])
+            ->with(
+                [
+                    'platform_account'=>function($query){
+                        return $query->select('platform_accounts.id','platform_accounts.name', 'platform_accounts.platform_id');
+                    }
+                ]
+            )
+            ->with([
+                'platform_account.platform'=>function($query){
+                    return $query->select('platforms.id','platforms.name');
+                }
+            ])
+            ->where('user_id','=', \Auth::user()->id)
+            ->where('stoped_time','=', NULL)
+            ->select('live_stream_activities.*');
+
+
+        return Datatables::of($data)
+                ->addIndexColumn()
+                
+                ->addColumn('current_time', function($row){
+                    return Carbon::parse(Carbon::now())->format('Y-m-d H:i');
+                })
+
+                ->addColumn('duration', function($row){
+                    $started_time = Carbon::parse($row->started_time);
+                    $curent_time = Carbon::parse(Carbon::now());
+                    $totalDuration = $started_time->diffForHumans($curent_time);
+                    return $totalDuration;
+                    
+                })
+                ->addColumn('action', function($row){
+                    $btn = '<a href="javascript:void(0)" class="btn btn-danger btn-xs btn-stop">STOP</a>';
+                    return $btn;
+                })
+                ->rawColumns(['current_time','duration','action'])
+                ->make(true);
+    }
+
 }

@@ -27,30 +27,7 @@ class CompleteMyProfileRequest extends FormRequest
             'name'=>'required|min:3',
             'address'=>'required',
             'gender'=>'required',
-            //'photo_file' => 'required|file|max:2000|mimes:jpg,png,jpeg',
-            'photo_file' => [
-                'required_if:old_photo_file,null',
-                'file',
-                'max:2000',
-                'mimes:jpg,png,jpeg'
-
-            ],
-            'ktp_number'=>'required',
-            'ktp_file' => [
-                'required_if:old_ktp_file,null',
-                'file',
-                'max:2000',
-                'mimes:jpg,png,jpeg'
-
-            ],
-            'passport_number'=>'required',
-            'passport_file' => [
-                'required_if:old_passport_file,null',
-                'file',
-                'max:2000',
-                'mimes:jpg,png,jpeg'
-
-            ],
+            'phone_number'=>'required',
             
 
         ];

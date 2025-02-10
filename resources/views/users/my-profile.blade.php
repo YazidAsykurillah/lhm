@@ -53,61 +53,14 @@
                     <label for="gender" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                     <div class="col-sm-9">
                         <select name="gender" class="form-control">
-                            <option>---Pilih Jenis Kelamin---</option>
+                            <option value="">---Pilih Jenis Kelamin---</option>
                             <option {{($profile->gender)=="Male"? 'selected':''}}  value="Male">Laki-Laki</option>
                             <option {{($profile->gender)=="Female"? 'selected':''}}  value="Female">Perempuan</option>
                             
                         </select>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="photo_file" class="col-sm-3 col-form-label">Pas Photo</label>
-                    <div class="col-sm-4">
-                        <input type="file" class="form-control" name="photo_file">
-                    </div>
-                    <div class="col-sm-5">
-                        <a href="{{asset(get_public_path().'/photo-files/'.$profile->photo_file)}}" data-lightbox="{{$profile->photo_file}}" data-title="Pas foto">
-                            <img class="profile-user-img img-fluid" src="{{asset(get_public_path().'/photo-files/'.$profile->photo_file)}}" alt="Pas Photo">
-                        </a>
-                        <input type="hidden" name="old_photo_file" value="{{$profile->photo_file}}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="ktp_number" class="col-sm-3 col-form-label">Nomor KTP</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="ktp_number" value="{{ $profile->ktp_number}}" placeholder="Nomor KTP">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="ktp_file" class="col-sm-3 col-form-label">File KTP</label>
-                    <div class="col-sm-4">
-                        <input type="file" class="form-control" name="ktp_file">
-                    </div>
-                    <div class="col-sm-5">
-                        <a href="{{asset(get_public_path().'/ktp-files/'.$profile->ktp_file)}}" data-lightbox="{{$profile->ktp_file}}" data-title="File KTP">
-                            <img class="profile-user-img img-fluid" src="{{asset(get_public_path().'/ktp-files/'.$profile->ktp_file)}}" alt="Foto KTP">
-                        </a>
-                        <input type="hidden" name="old_ktp_file" value="{{$profile->ktp_file}}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="passport_number" class="col-sm-3 col-form-label">Nomor Passport</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="passport_number" value="{{ $profile->passport_number}}" placeholder="Nomor Passport">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="passport_file" class="col-sm-3 col-form-label">File Passport</label>
-                    <div class="col-sm-4">
-                        <input type="file" class="form-control" name="passport_file">
-                    </div>
-                    <div class="col-sm-5">
-                        <a href="{{asset(get_public_path().'/passport-files/'.$profile->passport_file)}}" data-lightbox="{{$profile->passport_file}}" data-title="File KTP">
-                            <img class="profile-user-img img-fluid" src="{{asset(get_public_path().'/passport-files/'.$profile->passport_file)}}" alt="Photo Passport">
-                        </a>
-                        <input type="hidden" name="old_passport_file" value="{{$profile->passport_file}}">
-                    </div>
-                </div>
+                
                 <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-9">

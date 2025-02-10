@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('platform_account_id');
             $table->date('live_stream_date');
             $table->dateTime('started_time', precision: 0);
-            $table->dateTime('stoped_time', precision: 0);
+            $table->dateTime('stoped_time', precision: 0)->nullable();
             $table->decimal('sales_turn_over', total: 12, places: 2)->default(0)->comment('Omset Penjualan selama sesi live streaming');
             $table->timestamps();
         });

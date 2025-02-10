@@ -90,4 +90,10 @@ class LiveStreamActivityController extends Controller
     {
         //
     }
+
+
+    public function renderMyLiveStreamActivityView(Request $request)
+    {
+        return view('live-stream-activity.my-index');
+    }
 }

@@ -308,16 +308,24 @@ return [
 
         // Sidebar items:
         [
+            'text' => 'Live Stream Activity',
+            'url' => 'live-stream-activity',
+            'icon'=>'fas fa-fw fa-book',
+            'can'=>'manage-live-stream-activity'
+        ],
+
+        [
+            'text' => 'My Live Stream Activity',
+            'url' => 'my-live-stream-activity',
+            'icon'=>'fas fa-fw fa-book',
+            'can'=>'access-my-live-stream-activity'
+        ],
+
+        [
             'text' => 'User',
             'url' => 'users',
             'icon'=>'far fa-fw fa-user',
             'can'=>'manage-user'
-        ],
-
-        [
-            'text' => 'Live Stream Activity',
-            'url' => 'live-stream-activity',
-            'icon'=>'fas fa-fw fa-book',
         ],
 
         [

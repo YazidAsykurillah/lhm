@@ -40,10 +40,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('platform-account', PlatformAccountController::class);
 
 
+    Route::get('my-live-stream-activity', [LiveStreamActivityController::class, 'renderMyLiveStreamActivityView']);
     Route::get('live-stream-activity/datatables', [App\Http\Controllers\Datatables\LiveStreamActivityDatatablesController::class, 'index'])->name('live-stream-activity-datatables');
+    Route::get('ongoing-live-stream-activity/datatables', [App\Http\Controllers\Datatables\LiveStreamActivityDatatablesController::class, 'getOngoing'])->name('ongoing-live-stream-activity-datatables');
     Route::resource('live-stream-activity', LiveStreamActivityController::class);
 
     Route::get('my-profile', [App\Http\Controllers\MyProfileController::class, 'index']);
+    
     Route::post('my-profile/complete-profile', [App\Http\Controllers\MyProfileController::class, 'completeProfile']);
     
 

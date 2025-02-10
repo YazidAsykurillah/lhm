@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Live Stream Activity :: Index')
+@section('title', 'Live Stream Activity')
 
 @section('content_header')
     <div class="row mb-2">
@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{url('/live-stream-activity')}}">
+                    <a href="{{url('my-live-stream-activity')}}">
                         Live Stream Activity
                     </a>
                 </li>
@@ -26,43 +26,38 @@
 @stop
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Live Stream Activity List</h3>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">My Live Stream Activity History</h3>
+                <div class="card-tools"></div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered nowrap" id="table-live-stream-activity" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th style="width:5%;">No</th>
+                            <th style="width: 10%;">Platform</th>
+                            <th style="width: 10%;">Date</th>
+                            <th style="width: 10%;">Duration (hour)</th>
+                            <th style="">Omset</th>
+                            <th style="width: 10%;">Cost</th>
+                            <th style="width:5%;">Approval Status</th>
+                            <th style="width:10%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <div id="data-table-button-tools" class=""></div>
+            </div>
         </div>
     </div>
-    <div class="card-body">
-        
-        <table class="table table-bordered nowrap" id="table-live-stream-activity" style="width:100%">
-            <thead>
-                <tr>
-                    <th style="width:5%;">No</th>
-                    <th style="width: 10%;">Streamer</th>
-                    <th style="width: 10%;">Platform</th>
-                    <th style="width: 10%;">Date</th>
-                    <th style="width: 10%;">Duration (hour)</th>
-                    <th style="">Omset</th>
-                    <th style="width: 10%;">Cost</th>
-                    <th style="width:5%;">Approval Status</th>
-                    <th style="width:10%;">Action</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        
-    </div>
-    <div class="card-footer clearfix" style="display: block;">
-        <a href="{{ url('live-stream-activity/create') }}" class="btn btn-sm btn-primary" title="Create new Live Stream Activity">
-            Add New
-        </a>
-    </div>
 </div>
-
-
+<!-- /.row -->
 
 @endsection
 
@@ -77,16 +72,6 @@
             ajax: "{{ route('live-stream-activity-datatables') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', className:'text-center', searchable:false, orderable:false},
-                {
-                    data: 'streamer',
-                    name: 'streamer.name',
-                    render:function(data, type, row, meta){
-                        let streamer_template='';
-                            streamer_template+=data.name;
-                        return streamer_template;
-                    }
-                    
-                },
                 {
                     data: 'platform_account.platform',
                     name: 'platform_account.platform.name',
@@ -145,6 +130,7 @@
                         });
                     }
                 },
+                
                 {
                     data: 'live_stream_activity_approval',
                     name: 'live_stream_activity_approval.is_approved',
@@ -175,13 +161,9 @@
                 }},
             ],
             order: [
-                [ 3, "desc" ],
+                [ 2, "desc" ],
             ],
         });
-
-
-        
-
 
     });
 

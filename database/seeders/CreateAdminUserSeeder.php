@@ -33,7 +33,15 @@ class CreateAdminUserSeeder extends Seeder
          
        
         $role->syncPermissions(
-            ['manage-role', 'manage-user', 'access-admin-dashboard', 'manage-platform', 'manage-platform-account']
+            [
+                'manage-role',
+                'manage-user',
+                'access-admin-dashboard',
+                'manage-platform',
+                'manage-platform-account',
+                'manage-live-stream-activity',
+                'view-all-live-stream-activity',
+            ]
         );
          
         $user->assignRole([$role->id]);

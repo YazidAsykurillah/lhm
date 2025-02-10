@@ -17,9 +17,13 @@ class PermissionTableSeeder extends Seeder
            'manage-role',
            'manage-user',
            'manage-platform',
+           'manage-live-stream-activity',
+           'view-all-live-stream-activity',
            'manage-platform-account',
            'access-admin-dashboard',
            'access-my-profile',
+           'access-my-live-stream-activity',
+           
         ];
         
         foreach ($permissions as $permission) {
