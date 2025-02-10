@@ -123,4 +123,8 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+
+    //get public path
+    'public_path'=>env('PUBLIC_PATH', '')
+
 ];

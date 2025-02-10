@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => env('APP_NAME'),
-    'logo_img' => 'logo.jpeg',
+    'logo_img' => env('PUBLIC_PATH').'/logo.png',
     'logo_img_class' => 'brand-image  elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -401,32 +401,32 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/datatables/datatables.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/datatables/datatables.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/datatables/dataTables.bootstrap4.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/datatables/dataTables.bootstrap4.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/datatables/dataTables.responsive.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/datatables/dataTables.responsive.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/datatables/responsive.bootstrap4.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/datatables/responsive.bootstrap4.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '/vendor/datatables/dataTables.bootstrap4.css',
+                    'location' => env('PUBLIC_PATH').'/vendor/datatables/dataTables.bootstrap4.css',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '/vendor/datatables/responsive.bootstrap4.css',
+                    'location' => env('PUBLIC_PATH').'/vendor/datatables/responsive.bootstrap4.css',
                 ],
             ],
         ],
@@ -436,12 +436,12 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/select2/select2.min.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/select2/select2.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '/vendor/select2/select2.css',
+                    'location' => env('PUBLIC_PATH').'/vendor/select2/select2.css',
                 ],
             ],
         ],
@@ -451,7 +451,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/chartJS/Chart.bundle.min.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/chartJS/Chart.bundle.min.js',
                 ],
             ],
         ],
@@ -461,7 +461,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/sweet-alert/sweetalert2@8',
+                    'location' => env('PUBLIC_PATH').'/vendor/sweet-alert/sweetalert2@8',
                 ],
             ],
         ],
@@ -471,12 +471,12 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '/vendor/pace/pace-theme-center-radar.min.css',
+                    'location' => env('PUBLIC_PATH').'/vendor/pace/pace-theme-center-radar.min.css',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/pace/pace.min.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/pace/pace.min.js',
                 ],
             ],
         ],
@@ -486,27 +486,27 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '/vendor/datetimepicker/bootstrap-datetimepicker.min.css',
+                    'location' => env('PUBLIC_PATH').'/vendor/datetimepicker/bootstrap-datetimepicker.min.css',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '/vendor/datetimepicker/tempusdominus-bootstrap-4.min.css',
+                    'location' => env('PUBLIC_PATH').'/vendor/datetimepicker/tempusdominus-bootstrap-4.min.css',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/datetimepicker/moment.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/datetimepicker/moment.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/datetimepicker/bootstrap-datetimepicker.min.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/datetimepicker/bootstrap-datetimepicker.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/datetimepicker/tempusdominus-bootstrap-4.min.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/datetimepicker/tempusdominus-bootstrap-4.min.js',
                 ],
             ],
         ],
@@ -517,7 +517,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '/vendor/accounting.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/accounting.js',
                 ],
             ],
         ],
@@ -539,12 +539,12 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => get_public_path().'/vendor/lightbox/css/lightbox.css',
+                    'location' => env('PUBLIC_PATH').'/vendor/lightbox/css/lightbox.css',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => get_public_path().'/vendor/lightbox/js/lightbox.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/lightbox/js/lightbox.js',
                 ],
             ],
         ],

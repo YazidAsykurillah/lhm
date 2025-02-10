@@ -3,7 +3,7 @@
 if (! function_exists('get_public_path')) {
     function get_public_path()
     {
-        return config('stj.asset_location');
+        return config('app.public_path');
     }
 }
 

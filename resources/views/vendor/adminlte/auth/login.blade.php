@@ -95,10 +95,10 @@
 
     {{-- Register link --}}
     @if($register_url)
-        <p class="my-0">
+        <!-- <p class="my-0">
             <a href="{{ $register_url }}">
                 Belum punya akun? daftar disini
             </a>
-        </p>
+        </p> -->
     @endif
 @stop

@@ -73,7 +73,7 @@
                         <a href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <!-- <a href="{{ route('register') }}">Register</a> -->
                         @endif
                     @endauth
                 </div>
@@ -83,6 +83,7 @@
                 <div class="title m-b-md">
                     Host Track
                 </div>
+                <p>Pantau aktivitas live streaming streamer kamu dari manapun dan kapanpun</p>
 
                 
             </div>
