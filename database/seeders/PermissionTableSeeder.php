@@ -20,6 +20,7 @@ class PermissionTableSeeder extends Seeder
            'manage-live-stream-activity',
            'view-all-live-stream-activity',
            'manage-platform-account',
+           'manage-payment-note',
            'access-admin-dashboard',
            'access-my-profile',
            'access-my-live-stream-activity',

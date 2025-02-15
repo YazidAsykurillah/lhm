@@ -325,7 +325,12 @@ return [
             'icon'=>'fas fa-fw fa-book',
             'can'=>'access-my-live-stream-activity'
         ],
-
+        [
+            'text' => 'Payment Note',
+            'url' => 'payment-note',
+            'icon'=>'fas fa-fw fa-globe',
+            'can'=>'manage-payment-note'
+        ],
         [
             'text' => 'User',
             'url' => 'users',

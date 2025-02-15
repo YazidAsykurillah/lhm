@@ -42,6 +42,7 @@ class CreateAdminUserSeeder extends Seeder
                 'manage-live-stream-activity',
                 'view-all-live-stream-activity',
                 'approve-live-stream-activity',
+                'manage-payment-note',
             ]
         );
          

@@ -9,6 +9,7 @@ use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\PlatformAccountController;
 use App\Http\Controllers\LiveStreamActivityController;
 use App\Http\Controllers\MyProfileController;
+use App\Http\Controllers\PaymentNoteController;
 use App\Http\Controllers\Datatables\UsersDatatablesController;
 
 
@@ -47,6 +48,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('live-stream-activity/stop', [LiveStreamActivityController::class, 'stopLiveStreamActivity']);
     Route::post('live-stream-activity/approve', [LiveStreamActivityController::class, 'approve'])->name('approve-live-stream-activity');
     Route::resource('live-stream-activity', LiveStreamActivityController::class);
+
+
+    Route::get('payment-note/datatables', [App\Http\Controllers\Datatables\PaymentNoteDatatablesController::class, 'index'])->name('payment-note-datatables');
+    Route::resource('payment-note', PaymentNoteController::class);
 
     Route::get('my-profile', [App\Http\Controllers\MyProfileController::class, 'index']);
     
