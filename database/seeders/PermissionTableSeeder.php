@@ -23,6 +23,7 @@ class PermissionTableSeeder extends Seeder
            'access-admin-dashboard',
            'access-my-profile',
            'access-my-live-stream-activity',
+           'approve-live-stream-activity',
            
         ];
         

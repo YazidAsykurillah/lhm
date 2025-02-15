@@ -43,6 +43,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('my-live-stream-activity', [LiveStreamActivityController::class, 'renderMyLiveStreamActivityView']);
     Route::get('live-stream-activity/datatables', [App\Http\Controllers\Datatables\LiveStreamActivityDatatablesController::class, 'index'])->name('live-stream-activity-datatables');
     Route::get('ongoing-live-stream-activity/datatables', [App\Http\Controllers\Datatables\LiveStreamActivityDatatablesController::class, 'getOngoing'])->name('ongoing-live-stream-activity-datatables');
+    Route::post('live-stream-activity/start', [LiveStreamActivityController::class, 'startLiveStreamActivity']);
+    Route::post('live-stream-activity/stop', [LiveStreamActivityController::class, 'stopLiveStreamActivity']);
+    Route::post('live-stream-activity/approve', [LiveStreamActivityController::class, 'approve'])->name('approve-live-stream-activity');
     Route::resource('live-stream-activity', LiveStreamActivityController::class);
 
     Route::get('my-profile', [App\Http\Controllers\MyProfileController::class, 'index']);

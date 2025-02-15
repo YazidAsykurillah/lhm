@@ -308,6 +308,11 @@ return [
 
         // Sidebar items:
         [
+            'text' => 'Dashboard',
+            'url' => 'home',
+            'icon'=>'fas fa-fw fa-home',
+        ],
+        [
             'text' => 'Live Stream Activity',
             'url' => 'live-stream-activity',
             'icon'=>'fas fa-fw fa-book',
@@ -536,7 +541,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'https://unpkg.com/autonumeric@4.10.7/dist/autoNumeric.min.js',
+                    'location' => env('PUBLIC_PATH').'/vendor/autoNumeric.min.js',
                 ],
             ],
         ],

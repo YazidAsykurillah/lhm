@@ -40,10 +40,10 @@
                         <tr>
                             <th style="width:5%;">No</th>
                             <th style="width: 10%;">Platform</th>
-                            <th style="width: 10%;">Date</th>
-                            <th style="width: 10%;">Duration (hour)</th>
+                            <th style="width: 15%;">Date</th>
+                            <th style="width: 10%;">Total Hour</th>
                             <th style="">Omset</th>
-                            <th style="width: 10%;">Cost</th>
+                            <th style="width: 15%;">Cost</th>
                             <th style="width:5%;">Approval Status</th>
                             <th style="width:10%;">Action</th>
                         </tr>
@@ -90,12 +90,20 @@
                     data: 'live_stream_date',
                     name: 'live_stream_date',
                     render:function(data, type, row, meta){
+                        let started_time = row.started_time;
+                        let stoped_time = row.stoped_time;
+
                         let live_stream_date_template ='';
                             live_stream_date_template+=data;
                             live_stream_date_template+='<br>';
-                            live_stream_date_template+= moment(row.started_time).format('YYYY-MM-DD HH:mm');
-                            live_stream_date_template+='<br>'
-                            live_stream_date_template+= moment(row.stoped_time).format('YYYY-MM-DD HH:mm');
+                            live_stream_date_template+= moment(started_time).format('YYYY-MM-DD HH:mm');
+                            live_stream_date_template+='<br>';
+                            if(stoped_time!=null){
+                                live_stream_date_template+= moment(row.stoped_time).format('YYYY-MM-DD HH:mm');
+                            }else{
+                                live_stream_date_template+='<span class="badge bg-warning"><i class="fas fa-hourglass-start"></i> On Going<span>';
+                            }
+                            
                         return live_stream_date_template;
                     }
                 },
@@ -140,15 +148,20 @@
                                 return live_stream_activity_approval_template;
                             }
                             if(data.is_approved == true){
-                                live_stream_activity_approval_template+='<i class="fas fa-check-circle" title="Disetujui"></i>';
+                                live_stream_activity_approval_template+='<span class="badge bg-green">';
+                                live_stream_activity_approval_template+=    'Approved';
+                                live_stream_activity_approval_template+='</span>';
                                 live_stream_activity_approval_template+='<br>';
                                 live_stream_activity_approval_template+='<span class="badge bg-default">';
                                 live_stream_activity_approval_template+=    '<i class="fas fa-user"></i>&nbsp;';
                                 live_stream_activity_approval_template+=    data.approver.name;
                                 live_stream_activity_approval_template+='</span>';
-                            }else{
-                                live_stream_activity_approval_template+= '<i class="fas fa-stopwatch" title="Belum disetujui"></i>';
+                            }else if(data.is_approved == false && row.stoped_time != null){
+                                live_stream_activity_approval_template+='<span class="badge bg-yellow">';
+                                live_stream_activity_approval_template+=    'Need Approval';
+                                live_stream_activity_approval_template+='</span>';
                                 live_stream_activity_approval_template+='<br>';
+                                
                             }
                             
                         return live_stream_activity_approval_template;

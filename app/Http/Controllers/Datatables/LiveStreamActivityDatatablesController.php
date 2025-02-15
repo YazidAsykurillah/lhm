@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DataTables;
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use App\Models\LiveStreamActivity;
 
 class LiveStreamActivityDatatablesController extends Controller
@@ -96,9 +97,13 @@ class LiveStreamActivityDatatablesController extends Controller
                     return $query->select('platforms.id','platforms.name');
                 }
             ])
-            ->where('user_id','=', \Auth::user()->id)
+            
             ->where('stoped_time','=', NULL)
             ->select('live_stream_activities.*');
+
+            if(\Auth::user()->canNot('view-all-live-stream-activity')){
+                $data->where('user_id','=', \Auth::user()->id);
+            }
 
 
         return Datatables::of($data)
@@ -110,13 +115,15 @@ class LiveStreamActivityDatatablesController extends Controller
 
                 ->addColumn('duration', function($row){
                     $started_time = Carbon::parse($row->started_time);
-                    $curent_time = Carbon::parse(Carbon::now());
-                    $totalDuration = $started_time->diffForHumans($curent_time);
+                    $curent_time = Carbon::parse(now());
+                    $totalDuration = $started_time->diffForHumans($curent_time, CarbonInterface::DIFF_ABSOLUTE, false, 2);
                     return $totalDuration;
                     
                 })
                 ->addColumn('action', function($row){
-                    $btn = '<a href="javascript:void(0)" class="btn btn-danger btn-xs btn-stop">STOP</a>';
+                    $btn ='<a href="javascript:void(0)" class="btn btn-danger btn-xs btn-stop">';
+                    $btn.=  '<i class="fa fa-power-off"></i>&nbsp;&nbsp;STOP';
+                    $btn.='</a>';
                     return $btn;
                 })
                 ->rawColumns(['current_time','duration','action'])

@@ -44,10 +44,10 @@
                     <th style="width: 10%;">Streamer</th>
                     <th style="width: 10%;">Platform</th>
                     <th style="width: 10%;">Date</th>
-                    <th style="width: 10%;">Duration (hour)</th>
+                    <th style="width: 10%;">Total Hour</th>
                     <th style="">Omset</th>
-                    <th style="width: 10%;">Cost</th>
-                    <th style="width:5%;">Approval Status</th>
+                    <th style="width: 15%;">Cost</th>
+                    <th style="width:5%;text-align: center;">Approval</th>
                     <th style="width:10%;">Action</th>
                 </tr>
             </thead>
@@ -62,6 +62,86 @@
     </div>
 </div>
 
+<!--Modal Approve Live Stream Activity-->
+<div class="modal fade" data-backdrop="static" id="modal-approve-live-stream-activity">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" id="form-approve-live-stream-activity" action="{{route('approve-live-stream-activity')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Approve Live Stream Activity Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="streamer_name" class="col-sm-4 col-form-label">Streamer</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="streamer_name" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="platform_name" class="col-sm-4 col-form-label">Platform Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="platform_name" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="platform_account_name" class="col-sm-4 col-form-label">Platform Account</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="platform_account_name" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="live_stream_date" class="col-sm-4 col-form-label">Live Stream Date</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="live_stream_date" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="started_time" class="col-sm-4 col-form-label">Started Time</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="started_time" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="stoped_time" class="col-sm-4 col-form-label">Stoped Time</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="stoped_time" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="total_hour" class="col-sm-4 col-form-label">Total Hour</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="total_hour" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="sales_turn_over" class="col-sm-4 col-form-label">Omset</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="sales_turn_over" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="total_cost" class="col-sm-4 col-form-label">Cost</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="total_cost" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <input type="hidden" name="id">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check-circle"></i> Approve
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--ENDModal Approve Live Stream Activity-->
 
 
 @endsection
@@ -105,12 +185,20 @@
                     data: 'live_stream_date',
                     name: 'live_stream_date',
                     render:function(data, type, row, meta){
+
+                        let started_time = row.started_time;
+                        let stoped_time = row.stoped_time;
+
                         let live_stream_date_template ='';
                             live_stream_date_template+=data;
                             live_stream_date_template+='<br>';
-                            live_stream_date_template+= moment(row.started_time).format('YYYY-MM-DD HH:mm');
+                            live_stream_date_template+= moment(started_time).format('YYYY-MM-DD HH:mm');
                             live_stream_date_template+='<br>'
-                            live_stream_date_template+= moment(row.stoped_time).format('YYYY-MM-DD HH:mm');
+                            if(stoped_time!=null){
+                                live_stream_date_template+= moment(stoped_time).format('YYYY-MM-DD HH:mm');
+                            }else{
+                                live_stream_date_template+='<span class="badge bg-warning"><i class="fas fa-hourglass-start"></i> On Going<span>';
+                            }
                         return live_stream_date_template;
                     }
                 },
@@ -154,15 +242,23 @@
                                 return live_stream_activity_approval_template;
                             }
                             if(data.is_approved == true){
-                                live_stream_activity_approval_template+='<i class="fas fa-check-circle" title="Disetujui"></i>';
+                                live_stream_activity_approval_template+='<span class="badge bg-green">';
+                                live_stream_activity_approval_template+=    'Approved';
+                                live_stream_activity_approval_template+='</span>';
                                 live_stream_activity_approval_template+='<br>';
                                 live_stream_activity_approval_template+='<span class="badge bg-default">';
                                 live_stream_activity_approval_template+=    '<i class="fas fa-user"></i>&nbsp;';
                                 live_stream_activity_approval_template+=    data.approver.name;
                                 live_stream_activity_approval_template+='</span>';
-                            }else{
-                                live_stream_activity_approval_template+= '<i class="fas fa-stopwatch" title="Belum disetujui"></i>';
+                            }else if(data.is_approved == false && row.stoped_time != null){
+                                live_stream_activity_approval_template+='<span class="badge bg-yellow">';
+                                live_stream_activity_approval_template+=    'Need Approval';
+                                live_stream_activity_approval_template+='</span>';
                                 live_stream_activity_approval_template+='<br>';
+                                live_stream_activity_approval_template+='<button class="btn btn-approve btn-xs btn-primary">';
+                                live_stream_activity_approval_template+=    'Approve';
+                                live_stream_activity_approval_template+='</button>';
+                                
                             }
                             
                         return live_stream_activity_approval_template;
@@ -179,7 +275,90 @@
             ],
         });
 
+    
+        //Block Approve Live Stream Activity Trigger
+        liveStreamActivityDT.on('click', '.btn-approve', function (e) {
+            let data = liveStreamActivityDT.row(e.target.closest('tr')).data();
+            console.log(data);
+            let sales_turn_over = accounting.formatNumber(data.sales_turn_over,{
+                            precision: 0,
+                            thousand: ".",
+                            decimal : ","
+                        });
+            let total_cost = accounting.formatNumber(data.live_stream_activity_cost.total_cost,{
+                            precision: 0,
+                            thousand: ".",
+                            decimal : ","
+                        });
+            
+            $('#form-approve-live-stream-activity').find("input[name='streamer_name']").val(data.streamer.name);
+            $('#form-approve-live-stream-activity').find("input[name='platform_name']").val(data.platform_account.platform.name);
+            $('#form-approve-live-stream-activity').find("input[name='platform_account_name']").val(data.platform_account.name);
+            $('#form-approve-live-stream-activity').find("input[name='live_stream_date']").val(data.live_stream_date);
+            $('#form-approve-live-stream-activity').find("input[name='started_time']").val(data.started_time);
+            $('#form-approve-live-stream-activity').find("input[name='stoped_time']").val(data.stoped_time);
+            $('#form-approve-live-stream-activity').find("input[name='total_hour']").val(data.live_stream_activity_cost.total_hour);
+            $('#form-approve-live-stream-activity').find("input[name='sales_turn_over']").val(sales_turn_over);
+            $('#form-approve-live-stream-activity').find("input[name='total_cost']").val(total_cost);
+            $('#form-approve-live-stream-activity').find("input[name='id']").val(data.id);
+            $('#modal-approve-live-stream-activity').modal('show');
+        });
+        //ENDBlock Approve Live Stream Activity Trigger
 
+        //Block Approve Live Stream Activity
+        $('#form-approve-live-stream-activity').on('submit', function(event) {
+            event.preventDefault();
+            let url = $(this).attr('action');
+            $.ajax({
+                type: 'post',
+                url: url,
+                data: $(this).serialize(),
+                dataType: 'json',
+                beforeSend: function() {
+                    $('#form-approve-live-stream-activity').find("button[type='submit']").prop('disabled', true);
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data.status == true) {
+                        $('#form-approve-live-stream-activity')[0].reset();
+                        $('#modal-approve-live-stream-activity').modal('hide');
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            icon: 'success',
+                            title: data.message
+                        });
+                        liveStreamActivityDT.ajax.reload();
+                        $('#form-approve-live-stream-activity').find("button[type='submit']").prop('disabled', false);
+                    } else {
+                        $('#form-approve-live-stream-activity').find("button[type='submit']").prop('disabled', false);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    let errors = jqXHR.responseJSON;
+                    let error_template = "";
+                    $.each(errors.errors, function(key, value) {
+                        console.log(value);
+                        error_template += '<p>' + value + '</p>'; //showing only the first error.
+                    });
+                    console.log(error_template);
+                    $(document).Toasts('create', {
+                        class: 'bg-danger',
+                        position: 'bottomRight',
+                        autohide: true,
+                        delay: 5000,
+                        icon: 'fas fa-exclamation-circle',
+                        title: 'Error',
+                        subtitle: 'Validation error',
+                        body: error_template
+                    });
+                    $('#form-approve-live-stream-activity').find("button[type='submit']").prop('disabled', false);
+                }
+            });
+        });
+        //ENDBlock Approve Live Stream Activity
         
 
 
