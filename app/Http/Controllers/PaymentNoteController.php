@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePaymentNoteRequest;
+
+use App\Events\PaymentNoteIsSaved;
+
+use App\Models\PaymentNote;
 
 class PaymentNoteController extends Controller
 {
@@ -19,15 +24,44 @@ class PaymentNoteController extends Controller
      */
     public function create()
     {
-        //
+        return view('payment-note.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePaymentNoteRequest $request)
     {
-        //
+        
+        $response = [];
+        $code = 'PN_'.$request->user_id.'_'.$request->start_date.'_'.$request->end_date;
+        try {
+            $payment_note = PaymentNote::updateOrcreate(
+                [
+                    'user_id'=>$request->user_id,
+                    'start_date'=>$request->start_date,
+                    'end_date'=>$request->end_date,
+                ],
+                [
+                    'user_id'=>$request->user_id,
+                    'start_date'=>$request->start_date,
+                    'end_date'=>$request->end_date,
+                    'title'=>$request->title,
+                    'code'=>$code
+                ],
+            );
+
+            //fire event PaymentNoteIsSaved
+            event(new PaymentNoteIsSaved($payment_note));
+
+            $response['status'] = TRUE;
+            $response['message'] = 'Payment Note has been saved';
+            $response['data']['url'] = url('payment-note');
+        } catch (Exception $e) {
+            
+        }
+
+        return response()->json($response);
     }
 
     /**

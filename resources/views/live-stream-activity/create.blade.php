@@ -97,7 +97,8 @@
 
     </div>
     <div class="card-footer clearfix" style="display: block;">
-        <button type="submit" class="btn btn-sm btn-primary" title="Save new Live Stream Activity">
+        <a href="{{ url('live-stream-activity') }}" class="btn btn-sm btn-default">Cancel</a>
+        <button type="submit" class="btn btn-sm btn-primary float-right" title="Save new Live Stream Activity">
             <i class="fas fa-save"></i> Save
         </button>
     </div>

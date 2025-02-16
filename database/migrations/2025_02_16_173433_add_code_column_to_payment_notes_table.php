@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('live_stream_activity_payment_notes', function (Blueprint $table) {
-            $table->id();
-            $table->integer('live_stream_activity_id');
-            $table->integer('payment_note_id');
-            $table->timestamps();
+        Schema::table('payment_notes', function (Blueprint $table) {
+            $table->string('code')->after('amount');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('live_stream_activity_payment_notes');
+        Schema::table('payment_notes', function (Blueprint $table) {
+            $table->dropColumn('code');
+        });
     }
 };

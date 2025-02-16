@@ -109,9 +109,11 @@
                     data: 'amount',
                     name: 'amount',
                     render:function(data, type, row, meta){
-                        let amount_template='';
-                            amount_template+=data;
-                        return amount_template;
+                        return accounting.formatNumber(data,{
+                            precision: 0,
+                            thousand: ".",
+                            decimal : ","
+                        });
                     }
                     
                 },
