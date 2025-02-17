@@ -8,6 +8,7 @@ use App\Http\Requests\StorePaymentNoteRequest;
 use App\Events\PaymentNoteIsSaved;
 
 use App\Models\PaymentNote;
+use App\Models\LiveStreamActivity;
 
 class PaymentNoteController extends Controller
 {
@@ -51,6 +52,23 @@ class PaymentNoteController extends Controller
                 ],
             );
 
+            //select related live stream activities
+            $affectedLiveStreamActivities = LiveStreamActivity::query()
+                                        ->whereHas('live_stream_activity_approval', function($query){
+                                            $query->where('is_approved','=', TRUE);
+                                        })
+                                        ->where('user_id','=', $payment_note->user_id)
+                                        ->where('stoped_time','!=', NULL)
+                                        ->where('live_stream_date','>=', $payment_note->start_date)
+                                        ->where('live_stream_date','<=', $payment_note->end_date)
+                                        ->get();
+            if(count($affectedLiveStreamActivities)){
+                
+                $affectedLiveStreamActivities->toQuery()->update([
+                    'payment_note_id' => $payment_note->id,
+                ]);
+            }
+
             //fire event PaymentNoteIsSaved
             event(new PaymentNoteIsSaved($payment_note));
 
@@ -69,7 +87,9 @@ class PaymentNoteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $payment_note = PaymentNote::findOrFail($id);
+        return view('payment-note.show')
+            ->with('payment_note', $payment_note);
     }
 
     /**
