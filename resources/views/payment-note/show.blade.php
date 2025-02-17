@@ -77,8 +77,8 @@
                       <th>Platform</th>
                       <th>Date</th>
                       <th>Total Hour</th>
-                      <th>Rate Per Hour</th>
-                      <th>Subtotal</th>
+                      <th style="text-align: right;">Rate Per Hour</th>
+                      <th style="text-align:right;">Subtotal</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,8 +91,8 @@
                         </td>
                         <td>{{ $live_stream_activity->live_stream_date}}</td>
                         <td>{{ $live_stream_activity->live_stream_activity_cost->total_hour }}</td>
-                        <td>{{ $live_stream_activity->live_stream_activity_cost->streamer_rate }}</td>
-                        <td>{{ $live_stream_activity->live_stream_activity_cost->total_cost }}</td>
+                        <td style="text-align:right;">{{ $live_stream_activity->live_stream_activity_cost->streamer_rate }}</td>
+                        <td style="text-align:right;">{{ $live_stream_activity->live_stream_activity_cost->total_cost }}</td>
                         
                     </tr>
                     @endforeach
@@ -109,45 +109,41 @@
         <div class="col-6">
         </div>
         <div class="col-6">
-            <p class="lead">Amount Due 2/22/2014</p>
-
             <div class="table-responsive">
-            <table class="table">
-              <tbody><tr>
-                <th style="width:50%">Subtotal:</th>
-                <td>$250.30</td>
-              </tr>
-              <tr>
-                <th>Tax (9.3%)</th>
-                <td>$10.34</td>
-              </tr>
-              <tr>
-                <th>Shipping:</th>
-                <td>$5.80</td>
-              </tr>
-              <tr>
-                <th>Total:</th>
-                <td>$265.24</td>
-              </tr>
-            </tbody></table>
-          </div>
+                <table class="table">
+                    <tbody>
+                    @if(count($payment_note->payment_note_amount_collectors))
+                        @foreach($payment_note->payment_note_amount_collectors as $amount_collector)
+                        <tr>
+                            <td style="text-align: right;"><strong>{{ $amount_collector->name}}</strong></td>
+                            <td style="text-align:left;">:</td>
+                            <td style="text-align:right;">{{ $amount_collector->value }}</td>
+                        </tr>
+                        @endforeach
+                    @endif
+                        <tr>
+                            <td style="text-align: right;"><strong>Total</strong></td>
+                            <td style="text-align:left;">:</td>
+                            <td style="text-align:right;">{{ $payment_note->amount }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         
     </div>
   
 
-  <!-- this row will not appear when printing -->
-  <div class="row no-print">
-    <div class="col-12">
-      <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-      <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-        Payment
-      </button>
-      <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-        <i class="fas fa-download"></i> Generate PDF
-      </button>
+    <!-- this row will not appear when printing -->
+    <div class="row no-print">
+        <div class="col-12">
+            
+            <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default float-right">
+                <i class="fas fa-print"></i> Print
+            </a>
+            
+        </div>
     </div>
-  </div>
 </div>
 
 

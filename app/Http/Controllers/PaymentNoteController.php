@@ -35,22 +35,16 @@ class PaymentNoteController extends Controller
     {
         
         $response = [];
-        $code = 'PN_'.$request->user_id.'_'.$request->start_date.'_'.$request->end_date;
+        $code = 'PN_'.$request->user_id.'_'.$request->start_date.'_'.$request->end_date.'_'.time();
         try {
-            $payment_note = PaymentNote::updateOrcreate(
-                [
-                    'user_id'=>$request->user_id,
-                    'start_date'=>$request->start_date,
-                    'end_date'=>$request->end_date,
-                ],
-                [
-                    'user_id'=>$request->user_id,
-                    'start_date'=>$request->start_date,
-                    'end_date'=>$request->end_date,
-                    'title'=>$request->title,
-                    'code'=>$code
-                ],
-            );
+
+            $payment_note = new PaymentNote;
+            $payment_note->user_id = $request->user_id;
+            $payment_note->start_date = $request->start_date;
+            $payment_note->end_date = $request->end_date;
+            $payment_note->title = $request->title;
+            $payment_note->code = $code;
+            $payment_note->save();
 
             //select related live stream activities
             $affectedLiveStreamActivities = LiveStreamActivity::query()
@@ -61,6 +55,7 @@ class PaymentNoteController extends Controller
                                         ->where('stoped_time','!=', NULL)
                                         ->where('live_stream_date','>=', $payment_note->start_date)
                                         ->where('live_stream_date','<=', $payment_note->end_date)
+                                        ->where('payment_note_id','=', NULL)
                                         ->get();
             if(count($affectedLiveStreamActivities)){
                 

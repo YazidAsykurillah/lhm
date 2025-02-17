@@ -22,4 +22,12 @@ class PaymentNote extends Model
     {
         return $this->hasMany(LiveStreamActivity::class);
     }
+
+
+    public function payment_note_amount_collectors():HasMany
+    {
+        return $this->hasMany(PaymentNoteAmountCollector::class);
+    }
+
+    
 }
