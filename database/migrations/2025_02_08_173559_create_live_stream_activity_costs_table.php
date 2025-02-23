@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('live_stream_activity_id');
             $table->decimal('streamer_rate', total: 12, places: 2)->default(0)->comment('get from the rate per hour of the the live streamer');
             $table->decimal('total_hour', total:8, places:2 )->default(0);
-            $table->decimal('total_cost')->default(0)->comment('resulted from streamer_rate * total_hour');
+            $table->decimal('total_cost', total:12, places:2)->default(0)->comment('resulted from streamer_rate * total_hour');
             $table->timestamps();
 
         });

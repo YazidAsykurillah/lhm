@@ -68,8 +68,15 @@ class LiveStreamActivityDatatablesController extends Controller
         return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    //$btn = '<a href="javascript:void(0)" class="btn btn-primary btn-xs btn-edit">Edit</a>';
-                    return NULL;
+                    $btn ='';
+                    if($row->stoped_time == NULL){
+                        //show btn to stop live stream activity
+                        $btn.='<a href="javascript:void(0)" class="btn btn-danger btn-xs btn-stop">';
+                        $btn.=  '<i class="fa fa-power-off"></i>&nbsp;&nbsp;STOP';
+                        $btn.='</a>';    
+                    }
+                    
+                    return $btn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);

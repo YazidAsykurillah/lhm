@@ -143,6 +143,39 @@
 </div>
 <!--ENDModal Approve Live Stream Activity-->
 
+<!--Modal Stop Live Stream Activity-->
+<div class="modal fade" data-backdrop="static" id="modal-stop-live-stream-activity">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" id="form-stop-live-stream-activity" action="" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Stop Live Stream Activity</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="sales_turn_over" class="col-sm-3 col-form-label">Omset</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="sales_turn_over" class="form-control autonumeric" name="sales_turn_over" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <input type="hidden" name="live_stream_activity_id">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-power-off"></i> STOP
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--ENDModal Stop Live Stream Activity-->
+
 
 @endsection
 
@@ -266,7 +299,7 @@
                 },
                 {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center', render:function(data, type, row, meta){
                     let action ='';
-                        
+                        action+=data;
                     return action;
                 }},
             ],
@@ -274,7 +307,27 @@
                 [ 3, "desc" ],
             ],
         });
+        
 
+        //Autonumeric amount
+        new AutoNumeric('.autonumeric',{
+            digitGroupSeparator:'.',
+            decimalCharacter:',',
+            decimalPlaces:'0',
+            minimumValue:0,
+            modifyValueOnWheel:false,
+            watchExternalChanges:true,
+        });
+
+        //Block Stop Live Stream Activity Trigger
+        liveStreamActivityDT.on('click', '.btn-stop', function (e) {
+            let data = liveStreamActivityDT.row(e.target.closest('tr')).data();
+            console.log(data);
+            $('#form-stop-live-stream-activity').attr('action', '/live-stream-activity/stop');
+            $('#form-stop-live-stream-activity').find("input[name='live_stream_activity_id']").val(data.id);
+            $('#modal-stop-live-stream-activity').modal('show');
+        });
+        //ENDBlock Stop Live Stream Activity Trigger
     
         //Block Approve Live Stream Activity Trigger
         liveStreamActivityDT.on('click', '.btn-approve', function (e) {
@@ -360,6 +413,63 @@
         });
         //ENDBlock Approve Live Stream Activity
         
+
+        //Block Stop Live Stream Activity
+        $('#form-stop-live-stream-activity').on('submit', function(event) {
+            event.preventDefault();
+            let url = $(this).attr('action');
+            $.ajax({
+                type: 'post',
+                url: url,
+                data: $(this).serialize(),
+                dataType: 'json',
+                beforeSend: function() {
+                    $('#form-stop-live-stream-activity').find("button[type='submit']").prop('disabled', true);
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data.status == true) {
+                        $('#form-stop-live-stream-activity')[0].reset();
+                        $('#modal-stop-live-stream-activity').modal('hide');
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            icon: 'success',
+                            title: data.message
+                        });
+                        liveStreamActivityDT.ajax.reload();
+                        $('#form-stop-live-stream-activity').find("button[type='submit']").prop('disabled', false);
+                    } else {
+                        $('#form-stop-live-stream-activity').find("button[type='submit']").prop('disabled', false);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    let errors = jqXHR.responseJSON;
+                    //console.log(errors);
+                    let error_template = "";
+                    //console.log(textStatus);
+                    $.each(errors.errors, function(key, value) {
+                        console.log(value);
+                        error_template += '<p>' + value + '</p>'; //showing only the first error.
+                    });
+                    console.log(error_template);
+                    $(document).Toasts('create', {
+                        class: 'bg-danger',
+                        position: 'bottomRight',
+                        autohide: true,
+                        delay: 5000,
+                        icon: 'fas fa-exclamation-circle',
+                        title: 'Error',
+                        subtitle: 'Validation error',
+                        body: error_template
+                    });
+                    $('#form-stop-live-stream-activity').find("button[type='submit']").prop('disabled', false);
+                }
+            });
+        });
+        //ENDBlock Stop Live Stream Activity
 
 
     });
