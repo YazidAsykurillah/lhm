@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Validation\Rule;
+use Carbon\Carbon;
+use App\Models\LiveStreamActivity;
+
 class StoreLiveStreamActivityRequest extends FormRequest
 {
     /**
@@ -30,7 +34,18 @@ class StoreLiveStreamActivityRequest extends FormRequest
             'platform_account_id'=>[
                 'required',
                 'integer',
-                'exists:platform_accounts,id'
+                'exists:platform_accounts,id',
+                function($attribute, $value, $fail){
+                    //check if the user has already ongoing livestreamactivity for the platform_account_id
+                    $oGLivestream = LiveStreamActivity::where('user_id','=', $this->input('user_id'))
+                                    ->where('live_stream_date', '=', $this->input('live_stream_date'))
+                                    ->where('platform_account_id','=', $value)
+                                    ->whereNull('stoped_time')
+                                    ->first();
+                    if($oGLivestream){
+                        $fail('The live streamer already has on going activity for the selected platform account on selected date, please select another platform account');
+                    }
+                }
             ],
             'live_stream_date'=>[
                 'required',
@@ -38,7 +53,8 @@ class StoreLiveStreamActivityRequest extends FormRequest
             ],
             'started_time'=>[
                 'required',
-                'date_format:Y-m-d H:i'
+                'date_format:Y-m-d H:i',
+                'after_or_equal:'.Carbon::parse($this->input('live_stream_date'))->format('Y-m-d H:i')
             ],
             'stoped_time'=>[
                 'required',

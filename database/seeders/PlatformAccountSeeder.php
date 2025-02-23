@@ -16,15 +16,15 @@ class PlatformAccountSeeder extends Seeder
         $platform_accounts = [
             [
                 'platform_id'=>1,
-                'name'=>'Account 1',
+                'name'=>'Shopee 1',
             ],
             [
                 'platform_id'=>1,
-                'name'=>'Account 2',
+                'name'=>'Shopee 2',
             ],
             [
                 'platform_id'=>2,
-                'name'=>'Account 3',
+                'name'=>'Tiktok 1',
             ],
         ];
 

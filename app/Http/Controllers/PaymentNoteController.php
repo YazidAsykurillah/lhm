@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePaymentNoteRequest;
+use App\Services\PaymentNoteService;
 
 use App\Events\PaymentNoteIsSaved;
 
@@ -66,6 +67,11 @@ class PaymentNoteController extends Controller
 
             //fire event PaymentNoteIsSaved
             event(new PaymentNoteIsSaved($payment_note));
+
+            //run payment note service
+            $pn_service = new PaymentNoteService($payment_note);
+            $pn_service->update_amount();
+
 
             $response['status'] = TRUE;
             $response['message'] = 'Payment Note has been saved';

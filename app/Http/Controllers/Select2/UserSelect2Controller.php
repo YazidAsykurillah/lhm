@@ -32,7 +32,7 @@ class UserSelect2Controller extends Controller
             $search = $request->q;
             $data = User::query()
                 ->whereHas('roles', function($q) {
-                    $q->where('roles.name','=', 'Live Host');
+                    $q->where('roles.name','=', 'Live Streamer');
                 })
                 ->where('name','LIKE',"%$search%")
                 ->paginate(10);
@@ -40,7 +40,7 @@ class UserSelect2Controller extends Controller
         else{
             $data = User::query()
                 ->whereHas('roles', function($q) {
-                    $q->where('roles.name','=', 'Live Host');
+                    $q->where('roles.name','=', 'Live Streamer');
                 })
                 ->paginate(10); 
         }

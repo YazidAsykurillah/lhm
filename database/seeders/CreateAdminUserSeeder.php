@@ -34,7 +34,6 @@ class CreateAdminUserSeeder extends Seeder
        
         $role->syncPermissions(
             [
-                'manage-role',
                 'manage-user',
                 'access-admin-dashboard',
                 'manage-platform',

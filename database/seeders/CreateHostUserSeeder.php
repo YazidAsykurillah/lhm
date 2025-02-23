@@ -29,7 +29,7 @@ class CreateHostUserSeeder extends Seeder
         );
             
         $role = Role::updateOrCreate(
-            ['name'=>'Live Host']
+            ['name'=>'Live Streamer']
         );
 
         $role->syncPermissions(

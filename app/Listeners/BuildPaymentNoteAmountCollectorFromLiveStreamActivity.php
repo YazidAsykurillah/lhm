@@ -43,5 +43,6 @@ class BuildPaymentNoteAmountCollectorFromLiveStreamActivity
                 'value'=>$value
             ]
         );
+        
     }
 }
